@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: auth-server
+  name: auth-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-server
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: auth-server
+    spec:
+      containers:
+      - image: spring-7-auth-server:0.0.1-SNAPSHOT
+        name: spring-7-auth-server
+        ports:
+        - containerPort: 9000
+        env:
+        - name: AUTH_SERVER_ISSUER
+          value: http://auth-server:9000
+        resources: {}
+status: {}
